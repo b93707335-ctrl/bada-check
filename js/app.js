@@ -1,13 +1,21 @@
 (function () {
   let selectedBeach = BEACH_DATA[0];
   let selectedCategory = 'water';
+  let language = localStorage.getItem('badaCheckLanguage') || 'ko';
+  const translations = {
+    ko: { appName: '🌊 바다체크', tagline: '바다도 체크하고, 안전도 체크!', notice: '현재 화면에는 시연용 데이터가 포함되어 있습니다.', searchLabel: '가고 싶은 물놀이 장소를 검색하세요.', searchPlaceholder: '예: 해운대해수욕장, 대천천 애기소', nearby: '내 주변', selectedPlace: '선택한 장소', overallScore: '종합점수', safetyGuide: '안전 안내', history: '최근 확인 기록', home: '홈', waterSafety: '물가 안전', footer: '바다체크의 정보는 참고용입니다. 실제 물놀이 전 현장 통제, 기상특보 및 안전요원의 안내를 반드시 확인하세요.', water: '수질', marine: '물가 안전', weather: '날씨', completeness: '데이터 완성도', detailScore: '세부 점수', metricHint: '각 수치는 100점 만점으로 환산됩니다', dataSource: '데이터 출처', location: '위치', safe: '안전', unstable: '불안전', danger: '위험', critical: '매우 위험', noData: '측정정보 없음' },
+    ja: { appName: '🌊 海チェック', tagline: '海の状態と安全をチェック！', notice: 'この画面にはデモデータが含まれています。', searchLabel: '行きたい水辺スポットを検索してください。', searchPlaceholder: '例：海雲台海水浴場、大川川', nearby: '現在地の近く', selectedPlace: '選択した場所', overallScore: '総合スコア', safetyGuide: '安全案内', history: '最近の履歴', home: 'ホーム', waterSafety: '水辺の安全', footer: 'この情報は参考用です。入水前に現地の規制、気象警報、安全員の案内を必ず確認してください。', water: '水質', marine: '水辺の安全', weather: '天気', completeness: 'データ完全性', detailScore: '詳細スコア', metricHint: '各数値は100点満点に換算されています', dataSource: 'データ出典', location: '位置', safe: '安全', unstable: '注意', danger: '危険', critical: '非常に危険', noData: '測定情報なし' },
+    zh: { appName: '🌊 海洋检查', tagline: '检查海况，也检查安全！', notice: '此页面包含演示数据。', searchLabel: '搜索想去的水边地点。', searchPlaceholder: '例如：海云台海水浴场、大川川', nearby: '附近地点', selectedPlace: '已选地点', overallScore: '综合评分', safetyGuide: '安全指南', history: '最近记录', home: '首页', waterSafety: '水边安全', footer: '此信息仅供参考。入水前请务必确认现场管制、天气预警和安全员指引。', water: '水质', marine: '水边安全', weather: '天气', completeness: '数据完整度', detailScore: '详细评分', metricHint: '每项数值均换算为100分制', dataSource: '数据来源', location: '位置', safe: '安全', unstable: '不安全', danger: '危险', critical: '非常危险', noData: '无测量信息' }
+  };
+  const t = key => translations[language][key] || translations.ko[key] || key;
+  const statusKey = status => ({ '안전': 'safe', '불안전': 'unstable', '위험': 'danger', '매우 위험': 'critical', '측정정보 없음': 'noData' }[status] || status);
   const $ = selector => document.querySelector(selector);
   const $$ = selector => [...document.querySelectorAll(selector)];
   const categoryDefinitions = [
-    { id: 'water', name: '수질', metricKeys: ['ph', 'temperature', 'turbidity', 'dissolvedOxygen', 'salinity', 'waterTest'] },
-    { id: 'marine', name: '물가 안전', metricKeys: ['waveHeight', 'windSpeed', 'ripCurrent'] },
-    { id: 'weather', name: '날씨', metricKeys: ['rainfall', 'airTemperature', 'weatherAlert'] },
-    { id: 'completeness', name: '데이터 완성도', metricKeys: [] }
+    { id: 'water', nameKey: 'water', metricKeys: ['ph', 'temperature', 'turbidity', 'dissolvedOxygen', 'salinity', 'waterTest'] },
+    { id: 'marine', nameKey: 'marine', metricKeys: ['waveHeight', 'windSpeed', 'ripCurrent'] },
+    { id: 'weather', nameKey: 'weather', metricKeys: ['rainfall', 'airTemperature', 'weatherAlert'] },
+    { id: 'completeness', nameKey: 'completeness', metricKeys: [] }
   ];
 
   function visibleMetricKeys(category) {
@@ -27,7 +35,7 @@
     const { lat, lng, name } = selectedBeach;
     const offset = 0.012;
     const bbox = `${lng - offset},${lat - offset},${lng + offset},${lat + offset}`;
-    $('#mapLocationName').textContent = `${name} 위치`;
+    $('#mapLocationName').textContent = `${name} ${t('location')}`;
     $('#locationMap').src = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat}%2C${lng}`;
   }
 
@@ -35,23 +43,24 @@
     const result = Scoring.evaluateBeach(selectedBeach);
     $('#beachName').textContent = selectedBeach.name;
     $('#beachLocation').textContent = selectedBeach.location;
-    $('#updatedAt').textContent = `측정 시각: ${selectedBeach.measuredAt}`;
+    $('#updatedAt').textContent = `${t('location')}: ${selectedBeach.measuredAt}`;
     $('#overallScore').textContent = result.overall ?? '-';
     $('#overallGrade').textContent = result.grade.label;
     $('#overallGrade').className = `grade-pill ${result.grade.className}`;
     $('#overallReason').textContent = createReason(result);
     $('#actionGuide').textContent = actionGuide(result.overall);
-    $('#dataSource').textContent = `데이터 출처: ${selectedBeach.source}`;
+    $('#dataSource').textContent = `${t('dataSource')}: ${selectedBeach.source}`;
 
     const categories = categoryDefinitions.map(category => ({
       ...category,
+      name: t(category.nameKey),
       metricKeys: visibleMetricKeys(category),
       score: category.id === 'completeness' ? dataCompleteness(selectedBeach) : result.categories[category.id]
     }));
     $('#categoryGrid').innerHTML = categories.map(category => {
       const { id, name, score } = category;
       const g = Scoring.grade(score);
-      return `<button class="category-card card ${id === selectedCategory ? 'active' : ''}" data-category="${id}" aria-pressed="${id === selectedCategory}"><span>${name}</span><strong>${score ?? '-'}점</strong><span class="grade-level">${g.label}</span><span class="grade-pill grade-status ${g.className}">${g.status}</span></button>`;
+      return `<button class="category-card card ${id === selectedCategory ? 'active' : ''}" data-category="${id}" aria-pressed="${id === selectedCategory}"><span>${name}</span><strong>${score ?? '-'}점</strong><span class="grade-level">${g.label}</span><span class="grade-pill grade-status ${g.className}">${t(statusKey(g.status))}</span></button>`;
     }).join('');
     renderCategoryDetails(result);
     updateFavoriteButton();
@@ -63,7 +72,7 @@
       ? categoryDefinitions.filter(item => item.id !== 'completeness').map(item => {
           const metricKeys = visibleMetricKeys(item);
           const filled = metricKeys.filter(key => selectedBeach.metrics[key] != null).length;
-          return { label: `${item.name} 데이터`, value: `${filled}/${metricKeys.length}개 입력`, score: Math.round(filled / metricKeys.length * 100) };
+          return { label: `${t(item.nameKey)} 데이터`, value: `${filled}/${metricKeys.length}개 입력`, score: Math.round(filled / metricKeys.length * 100) };
         })
       : visibleMetricKeys(category).map(key => ({
           key,
@@ -73,14 +82,14 @@
           definition: Scoring.metricDefinitions[key]
         }));
 
-    $('#metricTitle').textContent = `${category.name} 세부 점수`;
-    $('#metricHint').textContent = category.id === 'completeness' ? '분야별 입력된 데이터 비율' : '각 수치는 100점 만점으로 환산됩니다';
+    $('#metricTitle').textContent = `${t(category.nameKey)} ${t('detailScore')}`;
+    $('#metricHint').textContent = category.id === 'completeness' ? `${t('completeness')} 100%` : t('metricHint');
     $('#metricGrid').innerHTML = details.map(({ key, label, value, score, definition }) => {
       const g = Scoring.grade(score);
       const width = Number.isFinite(score) ? score : 0;
       const help = definition ? `<button class="term-help" type="button" data-definition-key="${key}" aria-expanded="false" aria-label="${label} 뜻 보기">＊</button>` : '';
       const definitionPanel = definition ? `<p class="term-definition hidden" data-definition-panel="${key}">${definition}</p>` : '';
-      return `<article class="metric-card"><div class="metric-top"><div><strong>${label}${help}</strong><div class="muted">${value}</div></div><div class="metric-value">${score == null ? '-' : score}점</div></div><div class="progress"><span style="width:${width}%;background:${barColor(score)}"></span></div><span class="grade-pill ${g.className}">${g.label} · ${g.status}</span>${definitionPanel}</article>`;
+      return `<article class="metric-card"><div class="metric-top"><div><strong>${label}${help}</strong><div class="muted">${value}</div></div><div class="metric-value">${score == null ? '-' : score}점</div></div><div class="progress"><span style="width:${width}%;background:${barColor(score)}"></span></div><span class="grade-pill ${g.className}">${g.label} · ${t(statusKey(g.status))}</span>${definitionPanel}</article>`;
     }).join('');
   }
 
@@ -110,6 +119,7 @@
   function setupSearch() {
     const input = $('#beachSearch');
     input.value = selectedBeach.name;
+    input.placeholder = t('searchPlaceholder');
     function showMatches(query) {
       const q = query.trim();
       const matches = BEACH_DATA.filter(b => !q || b.name.includes(q) || b.location.includes(q));
@@ -124,6 +134,25 @@
     $('#autocomplete').addEventListener('click', e => {
       const button = e.target.closest('[data-beach-id]');
       if (button) selectBeach(BEACH_DATA.find(b => b.id === button.dataset.beachId));
+    });
+  }
+
+  function applyLanguage() {
+    document.documentElement.lang = language;
+    $('[data-i18n]').forEach(element => { element.textContent = t(element.dataset.i18n); });
+    $('.language-switcher').querySelectorAll('[data-language]').forEach(button => button.classList.toggle('active', button.dataset.language === language));
+    $('#beachSearch').placeholder = t('searchPlaceholder');
+    renderBeach();
+    renderLocationMap();
+  }
+
+  function setupLanguageSwitcher() {
+    $('.language-switcher').addEventListener('click', event => {
+      const button = event.target.closest('[data-language]');
+      if (!button) return;
+      language = button.dataset.language;
+      localStorage.setItem('badaCheckLanguage', language);
+      applyLanguage();
     });
   }
 
@@ -196,6 +225,6 @@
 
   function distance(lat1, lon1, lat2, lon2) { return Math.hypot(lat1-lat2, lon1-lon2); }
 
-  setupSearch(); setupNavigation(); setupHistory(); setupCategoryCards(); setupTermDefinitions(); saveHistory(selectedBeach); renderBeach(); renderLocationMap();
+  setupSearch(); setupNavigation(); setupHistory(); setupCategoryCards(); setupTermDefinitions(); setupLanguageSwitcher(); saveHistory(selectedBeach); applyLanguage();
 })();
 
