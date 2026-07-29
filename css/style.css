@@ -171,3 +171,8 @@ body[data-water-place="songdo"] { background-image:url("https://giftedu42-commit
 body[data-water-place="jangsan-valley"],body[data-water-place="unsusa-valley"],body[data-water-place="daecheon-aegiso"] { background-image:url("https://images.unsplash.com/photo-1439853949127-fa647821eba0?auto=format&fit=crop&w=1600&q=80") !important; }
 body[data-water-place="nakdong-hwamyeong"],body[data-water-place="nakdong-samnak"],body[data-water-place="suyeong-river"],body[data-water-place="oncheoncheon"],body[data-water-place="seokdaecheon"],body[data-water-place="daecheon-stream"],body[data-water-place="jwagwangcheon"],body[data-water-place="samnakcheon"],body[data-water-place="chuncheon"],body[data-water-place="dongcheon"],body[data-water-place="hoedong-reservoir"] { background-image:url("https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=1600&q=80") !important; }
 body[data-water-place] { background-attachment:fixed !important; background-position:center !important; background-size:cover !important; }
+
+
+/* 통합 화면에서는 바깥 배경 사진이 전체에 보이도록 안쪽 배경을 투명 처리 */
+body[data-water-place] { background-image:none !important; background-color:transparent !important; }
+.app-shell { background:transparent; }
