@@ -136,3 +136,17 @@ body[data-water-place="songjeong"] { background-image:url("https://giftedu42-com
 body[data-water-place="dadaepo"] { background-image:url("https://giftedu42-commits.github.io/ocean-/assets/dadaepo-sunset.png"); }
 body[data-water-place="songdo"] { background-image:url("https://giftedu42-commits.github.io/ocean-/assets/songdo-cablecar.png"); }
 body[data-water-place="gwangalli"],body[data-water-place="haeundae"],body[data-water-place="songjeong"],body[data-water-place="dadaepo"],body[data-water-place="songdo"] { background-color:#f7fbfa; background-position:center; background-size:cover; }
+
+
+/* 통합 페이지: 동료 앱 배경을 그대로 보이게 하고 검색을 히어로형으로 배치 */
+html,body { background:transparent !important; }
+body { background-image:none !important; }
+.app-shell { padding-top:12px; }
+.notice { display:none; }
+.search-section.card { margin:0 auto 18px; max-width:560px; padding:10px 0 16px; border:0; background:transparent; box-shadow:none; text-align:center; backdrop-filter:none; }
+.search-section label { color:#073d4d; font-size:17px; text-shadow:0 1px 8px rgba(255,255,255,.9); }
+.search-row { justify-content:center; }
+.search-row input { min-height:54px; border:0; border-radius:18px; box-shadow:0 12px 28px rgba(2,48,62,.18); }
+.secondary-button { border-radius:18px; box-shadow:0 10px 22px rgba(2,48,62,.14); }
+.autocomplete { max-width:560px; left:50%; transform:translateX(-50%); width:calc(100% - 28px); text-align:left; }
+.app-header { margin-bottom:12px; }
