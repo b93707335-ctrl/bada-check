@@ -139,7 +139,7 @@
 
   function applyLanguage() {
     document.documentElement.lang = language;
-    $('[data-i18n]').forEach(element => { element.textContent = t(element.dataset.i18n); });
+    $$('[data-i18n]').forEach(element => { element.textContent = t(element.dataset.i18n); });
     $('.language-switcher').querySelectorAll('[data-language]').forEach(button => button.classList.toggle('active', button.dataset.language === language));
     $('#beachSearch').placeholder = t('searchPlaceholder');
     renderBeach();
