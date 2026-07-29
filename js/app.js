@@ -5,7 +5,7 @@
   const $$ = selector => [...document.querySelectorAll(selector)];
   const categoryDefinitions = [
     { id: 'water', name: '수질', metricKeys: ['ph', 'temperature', 'turbidity', 'dissolvedOxygen', 'salinity', 'waterTest'] },
-    { id: 'marine', name: '해양 안전', metricKeys: ['waveHeight', 'windSpeed', 'ripCurrent'] },
+    { id: 'marine', name: '물가 안전', metricKeys: ['waveHeight', 'windSpeed', 'ripCurrent'] },
     { id: 'weather', name: '날씨', metricKeys: ['rainfall', 'airTemperature', 'weatherAlert'] },
     { id: 'completeness', name: '데이터 완성도', metricKeys: [] }
   ];
