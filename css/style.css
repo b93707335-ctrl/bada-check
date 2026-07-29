@@ -159,3 +159,15 @@ body { background-image:none !important; }
 .search-row::before { color:#0077b6; content:"⌕"; font-size:25px; font-weight:400; left:17px; line-height:1; position:absolute; top:14px; z-index:2; }
 .search-row input { background:rgba(255,255,255,.96) !important; border:0 !important; border-radius:16px !important; box-shadow:0 10px 24px rgba(3,53,72,.18) !important; min-height:52px; padding:14px 18px 14px 48px !important; width:100%; }
 #locationBtn { display:none !important; }
+
+
+/* 실제 돋보기 아이콘과 장소별 배경 전환 */
+.search-row::before { content:"🔍" !important; font-size:16px !important; top:18px !important; }
+body[data-water-place="gwangalli"] { background-image:url("https://giftedu42-commits.github.io/ocean-/assets/gwangalli-night.png") !important; }
+body[data-water-place="haeundae"] { background-image:url("https://giftedu42-commits.github.io/ocean-/assets/haeundae-beach.png") !important; }
+body[data-water-place="songjeong"] { background-image:url("https://giftedu42-commits.github.io/ocean-/assets/songjeong-beach.png") !important; }
+body[data-water-place="dadaepo"] { background-image:url("https://giftedu42-commits.github.io/ocean-/assets/dadaepo-sunset.png") !important; }
+body[data-water-place="songdo"] { background-image:url("https://giftedu42-commits.github.io/ocean-/assets/songdo-cablecar.png") !important; }
+body[data-water-place="jangsan-valley"],body[data-water-place="unsusa-valley"],body[data-water-place="daecheon-aegiso"] { background-image:url("https://images.unsplash.com/photo-1439853949127-fa647821eba0?auto=format&fit=crop&w=1600&q=80") !important; }
+body[data-water-place="nakdong-hwamyeong"],body[data-water-place="nakdong-samnak"],body[data-water-place="suyeong-river"],body[data-water-place="oncheoncheon"],body[data-water-place="seokdaecheon"],body[data-water-place="daecheon-stream"],body[data-water-place="jwagwangcheon"],body[data-water-place="samnakcheon"],body[data-water-place="chuncheon"],body[data-water-place="dongcheon"],body[data-water-place="hoedong-reservoir"] { background-image:url("https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=1600&q=80") !important; }
+body[data-water-place] { background-attachment:fixed !important; background-position:center !important; background-size:cover !important; }
