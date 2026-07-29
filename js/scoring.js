@@ -23,7 +23,7 @@
   };
 
   const metricMeta = {
-    ph: ["pH", ""], temperature: ["수온", "℃"], turbidity: ["탁도", " NTU"], dissolvedOxygen: ["용존산소", " mg/L"], salinity: ["염분", " PSU"], waterTest: ["공식 수질검사", ""], waveHeight: ["파도 높이", " m"], windSpeed: ["풍속", " m/s"], ripCurrent: ["이안류 위험도", ""], rainfall: ["강수량", " mm"], airTemperature: ["기온", "℃"], weatherAlert: ["기상특보", ""]
+    ph: ["pH", ""], temperature: ["수온", "℃"], turbidity: ["탁도", " NTU"], dissolvedOxygen: ["용존산소", " mg/L"], salinity: ["염분", " PSU"], waterTest: ["공식 수질검사", ""], waveHeight: ["수면 높이", " m"], windSpeed: ["풍속", " m/s"], ripCurrent: ["물살 위험도", ""], rainfall: ["강수량", " mm"], airTemperature: ["기온", "℃"], weatherAlert: ["기상특보", ""]
   };
 
   function grade(score) {
@@ -45,6 +45,7 @@
     Object.entries(beach.metrics).forEach(([key, value]) => {
       if (scorers[key]) scores[key] = scorers[key](value);
     });
+    if (beach.waterType === "freshwater") scores.salinity = linearPenalty(beach.metrics.salinity, 0, 0.5, 0, 2);
     const categories = {
       water: average([scores.ph, scores.temperature, scores.turbidity, scores.dissolvedOxygen, scores.salinity, scores.waterTest]),
       marine: average([scores.waveHeight, scores.windSpeed, scores.ripCurrent]),
