@@ -9,7 +9,6 @@
     $('#autocomplete').classList.add('hidden');
     saveHistory(beach);
     renderBeach();
-    renderShower();
   }
 
   function renderBeach() {
@@ -65,28 +64,6 @@
     if (score >= 80) return '#2e9d63'; if (score >= 60) return '#e0a800'; if (score >= 40) return '#f07b22'; return '#d64545';
   }
 
-  function renderShower() {
-    const data = Shower.load(selectedBeach.id);
-    const available = Math.max(Shower.TOTAL_ROOMS - data.currentUsers, 0);
-    const wait = Shower.estimate(data);
-    $('#showerBeachName').textContent = `${selectedBeach.name} 샤워실`;
-    $('#currentUsers').textContent = `${data.currentUsers}명`;
-    $('#waitingUsers').textContent = `${data.waitingUsers}명`;
-    $('#availableRooms').textContent = `${available}개`;
-    $('#estimatedTime').textContent = wait === 0 ? '바로 이용 가능' : `약 ${wait}분`;
-    $('#peopleSummary').textContent = `현재 샤워 중 ${data.currentUsers}명 + 대기자 ${data.waitingUsers}명 = 총 ${data.currentUsers + data.waitingUsers}명`;
-    $('#calculationDescription').textContent = data.currentUsers < 20 && data.waitingUsers === 0
-      ? `현재 ${data.currentUsers}명이 샤워 중이며 ${available}개의 샤워실을 바로 이용할 수 있습니다.`
-      : `샤워 중인 사람과 대기자 수를 기준으로 평균 ${Shower.AVG_MINUTES}분 단위로 계산했습니다.`;
-    $('#quickShowerSummary').textContent = `샤워 중 ${data.currentUsers}명 · 대기 ${data.waitingUsers}명 · ${wait === 0 ? '바로 이용 가능' : `약 ${wait}분`}`;
-  }
-
-  function showMessage(text) {
-    $('#showerMessage').textContent = text;
-    clearTimeout(showMessage.timer);
-    showMessage.timer = setTimeout(() => $('#showerMessage').textContent = '', 2600);
-  }
-
   function setupSearch() {
     const input = $('#beachSearch');
     input.value = selectedBeach.name;
@@ -110,7 +87,6 @@
       $$('.view').forEach(v => v.classList.toggle('active', v.id === target));
       $$('.nav-button').forEach(n => n.classList.toggle('active', n.dataset.target === target));
       if (target === 'historyView') renderHistory();
-      if (target === 'showerView') renderShower();
     }));
   }
 
@@ -142,9 +118,6 @@
     localStorage.setItem('badaCheckFavorites', JSON.stringify(ids)); updateFavoriteButton();
   }
 
-  $('#enterButton').addEventListener('click', () => { const d = Shower.enter(selectedBeach.id); renderShower(); showMessage(d.waitingUsers ? `대기자로 등록되었습니다. 현재 대기 ${d.waitingUsers}명입니다.` : '입장 처리되었습니다.'); });
-  $('#exitButton').addEventListener('click', () => { const result = Shower.exit(selectedBeach.id); renderShower(); showMessage(result.error || (result.data.waitingUsers ? '퇴장 처리 후 첫 대기자가 자동 입장했습니다.' : '퇴장 처리되었습니다.')); });
-  $('#resetShowerBtn').addEventListener('click', () => { Shower.reset(selectedBeach.id); renderShower(); showMessage('샤워실 시연 데이터가 초기화되었습니다.'); });
   $('#favoriteBtn').addEventListener('click', toggleFavorite);
   $('#locationBtn').addEventListener('click', () => {
     if (!navigator.geolocation) return alert('이 브라우저는 위치 기능을 지원하지 않습니다.');
@@ -154,11 +127,9 @@
       selectBeach(nearest);
     }, () => alert('위치 권한을 허용하지 않아 기본 해수욕장을 표시합니다.'));
   });
-  window.addEventListener('storage', e => { if (e.key && e.key.startsWith('badaCheckShower_')) renderShower(); });
-  setInterval(renderShower, 3000);
 
   function distance(lat1, lon1, lat2, lon2) { return Math.hypot(lat1-lat2, lon1-lon2); }
 
-  setupSearch(); setupNavigation(); setupHistory(); saveHistory(selectedBeach); renderBeach(); renderShower();
+  setupSearch(); setupNavigation(); setupHistory(); saveHistory(selectedBeach); renderBeach();
 })();
 
