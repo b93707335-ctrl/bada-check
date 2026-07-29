@@ -27,11 +27,12 @@
   };
 
   function grade(score) {
-    if (score == null) return { label: "측정정보 없음", className: "caution" };
-    if (score >= 80) return { label: "안전", className: "safe" };
-    if (score >= 60) return { label: "주의", className: "caution" };
-    if (score >= 40) return { label: "위험", className: "danger" };
-    return { label: "매우 위험", className: "critical" };
+    if (score == null) return { level: "-", label: "등급 없음", status: "측정정보 없음", className: "caution" };
+    if (score >= 90) return { level: 1, label: "1등급", status: "안전", className: "safe" };
+    if (score >= 75) return { level: 2, label: "2등급", status: "안전", className: "safe" };
+    if (score >= 55) return { level: 3, label: "3등급", status: "불안전", className: "caution" };
+    if (score >= 35) return { level: 4, label: "4등급", status: "위험", className: "danger" };
+    return { level: 5, label: "5등급", status: "매우 위험", className: "critical" };
   }
 
   function average(values) {
