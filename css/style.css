@@ -125,3 +125,14 @@ body::before { content:""; position:fixed; inset:0; z-index:-1; background:linea
 body[data-water-place="jangsan-valley"] .hero-card,body[data-water-place="unsusa-valley"] .hero-card,body[data-water-place="daecheon-aegiso"] .hero-card { background:linear-gradient(135deg,rgba(250,255,251,.90),rgba(215,246,229,.72)); }
 body[data-water-place="nakdong-hwamyeong"] .hero-card,body[data-water-place="nakdong-samnak"] .hero-card,body[data-water-place="suyeong-river"] .hero-card,body[data-water-place="oncheoncheon"] .hero-card { background:linear-gradient(135deg,rgba(249,255,255,.90),rgba(214,241,241,.74)); }
 @media (max-width:560px){.app-header{padding:12px;border-radius:18px}.card{padding:16px}.hero-card{padding:18px}.language-button{padding:6px 7px;font-size:10px}}
+
+
+/* 장소별 실제 풍경 사진: 하늘색 배경 효과 제거 */
+body::before { display:none; }
+body { background-color:#f7fbfa; }
+body[data-water-place="gwangalli"] { background-image:url("https://giftedu42-commits.github.io/ocean-/assets/gwangalli-night.png"); }
+body[data-water-place="haeundae"] { background-image:url("https://giftedu42-commits.github.io/ocean-/assets/haeundae-beach.png"); }
+body[data-water-place="songjeong"] { background-image:url("https://giftedu42-commits.github.io/ocean-/assets/songjeong-beach.png"); }
+body[data-water-place="dadaepo"] { background-image:url("https://giftedu42-commits.github.io/ocean-/assets/dadaepo-sunset.png"); }
+body[data-water-place="songdo"] { background-image:url("https://giftedu42-commits.github.io/ocean-/assets/songdo-cablecar.png"); }
+body[data-water-place="gwangalli"],body[data-water-place="haeundae"],body[data-water-place="songjeong"],body[data-water-place="dadaepo"],body[data-water-place="songdo"] { background-color:#f7fbfa; background-position:center; background-size:cover; }
