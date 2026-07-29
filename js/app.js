@@ -40,6 +40,7 @@
   }
 
   function renderBeach() {
+    document.body.dataset.waterPlace = selectedBeach.id;
     const result = Scoring.evaluateBeach(selectedBeach);
     $('#beachName').textContent = selectedBeach.name;
     $('#beachLocation').textContent = selectedBeach.location;
