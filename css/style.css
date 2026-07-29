@@ -49,8 +49,8 @@ h1 { margin-bottom: 5px; color: var(--deep-blue); }
 .category-card, .status-card { padding: 18px; }
 .category-card { width: 100%; border: 2px solid transparent; color: var(--text); text-align: left; }
 .category-card.active { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(0, 180, 216, .14), var(--shadow); }
-.category-card .grade-level { display: block; margin-top: 8px; color: var(--muted); font-size: 13px; font-weight: 800; }
-.category-card .grade-status { display: inline-block; margin-top: 5px; }
+.category-card .grade-level { display: block; margin-top: 10px; color: var(--muted); font-size: 13px; font-weight: 800; }
+.category-card .category-status { margin-top: 5px; font-size: 29px; line-height: 1.15; }
 .category-card strong, .status-card strong { display: block; margin-top: 8px; color: var(--deep-blue); font-size: 25px; }
 .section-title-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
 .metric-grid { display: grid; gap: 12px; }
