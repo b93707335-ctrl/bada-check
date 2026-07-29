@@ -23,7 +23,13 @@
   };
 
   const metricMeta = {
-    ph: ["pH", ""], temperature: ["수온", "℃"], turbidity: ["탁도", " NTU"], dissolvedOxygen: ["용존산소", " mg/L"], salinity: ["염분", " PSU"], waterTest: ["공식 수질검사", ""], waveHeight: ["수면 높이", " m"], windSpeed: ["풍속", " m/s"], ripCurrent: ["물살 위험도", ""], rainfall: ["강수량", " mm"], airTemperature: ["기온", "℃"], weatherAlert: ["기상특보", ""]
+    ph: ["pH", ""], temperature: ["수온", "℃"], turbidity: ["탁도", " NTU"], dissolvedOxygen: ["용존산소", " mg/L"], salinity: ["염분", " PSU"], waterTest: ["공식 수질검사", ""], waveHeight: ["수면 높이", " m"], windSpeed: ["풍속", " m/s"], ripCurrent: ["이안류·물살 위험도", ""], rainfall: ["강수량", " mm"], airTemperature: ["기온", "℃"], weatherAlert: ["기상특보", ""]
+  };
+
+  const metricDefinitions = {
+    ph: "물의 산성·알칼리성 정도를 나타내는 수치예요. 일반적으로 7에 가까우면 중성이고, 너무 낮거나 높으면 물놀이에 주의가 필요해요.",
+    dissolvedOxygen: "물속에 녹아 있는 산소의 양이에요. 수치가 높을수록 물속 생물이 살기 좋은 상태로 볼 수 있어요.",
+    ripCurrent: "해변에서는 바다 쪽으로 빠르게 흐르는 이안류, 계곡·강에서는 갑자기 세지는 물살의 위험을 뜻해요. 위험할 때는 물에 들어가지 마세요."
   };
 
   function grade(score) {
@@ -58,6 +64,6 @@
     return { scores, categories, overall, grade: grade(overall) };
   }
 
-  window.Scoring = { evaluateBeach, grade, metricMeta };
+  window.Scoring = { evaluateBeach, grade, metricMeta, metricDefinitions };
 })();
 
