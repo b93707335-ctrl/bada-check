@@ -37,7 +37,7 @@
     $('#categoryGrid').innerHTML = categories.map(category => {
       const { id, name, score } = category;
       const g = Scoring.grade(score);
-      return `<button class="category-card card ${id === selectedCategory ? 'active' : ''}" data-category="${id}" aria-pressed="${id === selectedCategory}"><span>${name}</span><strong>${score ?? '-'}점</strong><span class="grade-level">${g.label}</span><span class="grade-pill grade-status ${g.className}">${g.status}</span></button>`;
+      return `<button class="category-card card ${id === selectedCategory ? 'active' : ''}" data-category="${id}" aria-pressed="${id === selectedCategory}"><span>${name}</span><span class="grade-level">${g.label}</span><strong class="category-status ${g.className}">${g.status}</strong></button>`;
     }).join('');
     renderCategoryDetails(result);
     updateFavoriteButton();
