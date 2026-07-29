@@ -100,3 +100,10 @@ footer { margin-top: 24px; padding: 16px; color: var(--muted); font-size: 12px; 
 .language-button:last-child { border-right: 0; }
 .language-button.active { background: var(--blue); color: white; }
 @media (max-width: 420px) { .app-header { gap: 8px; } .header-actions { gap: 6px; } .language-button { padding: 6px 5px; font-size: 10px; } }
+
+
+/* 선택한 장소에 맞춰 달라지는 배경 */
+body { background-attachment: fixed; background-size: cover; background-position: center; transition: background .35s ease; }
+body[data-water-place="gwangalli"], body[data-water-place="haeundae"], body[data-water-place="songjeong"], body[data-water-place="songdo"], body[data-water-place="dadaepo"] { background-image: linear-gradient(rgba(232,250,255,.82),rgba(238,250,255,.9)), url("https://giftedu42-commits.github.io/ocean-/assets/gwangalli-night.png"); }
+body[data-water-place="jangsan-valley"], body[data-water-place="unsusa-valley"], body[data-water-place="daecheon-aegiso"] { background-image: linear-gradient(rgba(235,251,244,.84),rgba(243,253,249,.92)), url("https://images.unsplash.com/photo-1439853949127-fa647821eba0?auto=format&fit=crop&w=1600&q=80"); }
+body[data-water-place="nakdong-hwamyeong"], body[data-water-place="nakdong-samnak"], body[data-water-place="suyeong-river"], body[data-water-place="oncheoncheon"], body[data-water-place="seokdaecheon"], body[data-water-place="daecheon-stream"], body[data-water-place="jwagwangcheon"], body[data-water-place="samnakcheon"], body[data-water-place="chuncheon"], body[data-water-place="dongcheon"], body[data-water-place="hoedong-reservoir"] { background-image: linear-gradient(rgba(235,248,250,.84),rgba(242,252,249,.92)), url("https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=1600&q=80"); }
