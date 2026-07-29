@@ -109,7 +109,8 @@
       box.innerHTML = matches.map(b => `<button data-beach-id="${b.id}">${b.name}<br><small>${b.location}</small></button>`).join('');
       box.classList.remove('hidden');
     }
-    input.addEventListener('focus', () => showMatches(input.value));
+    input.addEventListener('focus', () => showMatches(''));
+    input.addEventListener('click', () => showMatches(''));
     input.addEventListener('input', () => showMatches(input.value));
     $('#autocomplete').addEventListener('click', e => {
       const button = e.target.closest('[data-beach-id]');
