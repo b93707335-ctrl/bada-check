@@ -43,6 +43,21 @@ window.BEACH_DATA = [
     id: "suyeong-river", name: "수영강", location: "부산 수영구", waterType: "brackish", lat: 35.1642, lng: 129.1224,
     measuredAt: "2026-07-28 08:00", source: "시연용 데이터 · 공공데이터 연동 예정",
     metrics: { ph: 7.72, temperature: 24.1, turbidity: 5.1, dissolvedOxygen: 6.7, salinity: 12.4, waterTest: "주의", waveHeight: 0.5, windSpeed: 3.7, ripCurrent: "보통", rainfall: 2, airTemperature: 27.6, weatherAlert: "없음" }
+  },
+  {
+    id: "nakdong-hwamyeong", name: "낙동강 화명생태공원", location: "부산 북구 화명동", waterType: "freshwater", lat: 35.2344, lng: 129.0039,
+    measuredAt: "2026-07-28 08:00", source: "시연용 데이터 · 공공데이터 연동 예정",
+    metrics: { ph: 7.46, temperature: 23.8, turbidity: 5.9, dissolvedOxygen: 6.4, salinity: 0.1, waterTest: "주의", waveHeight: 0.3, windSpeed: 3.0, ripCurrent: "보통", rainfall: 2, airTemperature: 27.1, weatherAlert: "없음" }
+  },
+  {
+    id: "nakdong-samnak", name: "낙동강 삼락생태공원", location: "부산 사상구", waterType: "freshwater", lat: 35.1742, lng: 128.9796,
+    measuredAt: "2026-07-28 08:00", source: "시연용 데이터 · 공공데이터 연동 예정",
+    metrics: { ph: 7.39, temperature: 24.2, turbidity: 6.3, dissolvedOxygen: 6.0, salinity: 0.1, waterTest: "주의", waveHeight: 0.3, windSpeed: 3.4, ripCurrent: "보통", rainfall: 3, airTemperature: 27.4, weatherAlert: "없음" }
+  },
+  {
+    id: "hoedong-reservoir", name: "회동수원지", location: "부산 금정구", waterType: "freshwater", lat: 35.2458, lng: 129.1215,
+    measuredAt: "2026-07-28 07:30", source: "시연용 데이터 · 공공데이터 연동 예정",
+    metrics: { ph: 7.52, temperature: 21.6, turbidity: 3.1, dissolvedOxygen: 7.3, salinity: 0.1, waterTest: "적합", waveHeight: 0.1, windSpeed: 2.2, ripCurrent: "낮음", rainfall: 0, airTemperature: 25.7, weatherAlert: "없음" }
   }
 ];
 
