@@ -58,6 +58,8 @@ h1 { margin-bottom: 5px; color: var(--deep-blue); }
 .metric-card:last-child { border-bottom: 0; }
 .metric-top { display: flex; justify-content: space-between; gap: 10px; }
 .metric-value { font-weight: 800; }
+.term-help { margin-left: 3px; padding: 0; border: 0; background: transparent; color: #d64545; font-size: 17px; font-weight: 900; line-height: 1; vertical-align: middle; }
+.term-definition { margin: 10px 0 0; padding: 10px 12px; border-left: 4px solid #d64545; border-radius: 8px; background: #fff1f1; color: #7d3030; font-size: 13px; line-height: 1.55; }
 .progress { height: 9px; margin: 9px 0 5px; overflow: hidden; border-radius: 999px; background: #e9f1f4; }
 .progress span { display: block; height: 100%; border-radius: inherit; }
 .quick-shower { display: flex; justify-content: space-between; align-items: center; gap: 15px; }
