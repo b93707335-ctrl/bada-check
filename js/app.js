@@ -1,7 +1,14 @@
 (function () {
   let selectedBeach = BEACH_DATA[0];
+  let selectedCategory = 'water';
   const $ = selector => document.querySelector(selector);
   const $$ = selector => [...document.querySelectorAll(selector)];
+  const categoryDefinitions = [
+    { id: 'water', name: '수질', metricKeys: ['ph', 'temperature', 'turbidity', 'dissolvedOxygen', 'salinity', 'waterTest'] },
+    { id: 'marine', name: '해양 안전', metricKeys: ['waveHeight', 'windSpeed', 'ripCurrent'] },
+    { id: 'weather', name: '날씨', metricKeys: ['rainfall', 'airTemperature', 'weatherAlert'] },
+    { id: 'completeness', name: '데이터 완성도', metricKeys: [] }
+  ];
 
   function selectBeach(beach) {
     selectedBeach = beach;
@@ -23,22 +30,39 @@
     $('#actionGuide').textContent = actionGuide(result.overall);
     $('#dataSource').textContent = `데이터 출처: ${selectedBeach.source}`;
 
-    const categories = [
-      ['수질', result.categories.water], ['해양 안전', result.categories.marine], ['날씨', result.categories.weather], ['데이터 완성도', dataCompleteness(selectedBeach)]
-    ];
-    $('#categoryGrid').innerHTML = categories.map(([name, score]) => {
+    const categories = categoryDefinitions.map(category => ({
+      ...category,
+      score: category.id === 'completeness' ? dataCompleteness(selectedBeach) : result.categories[category.id]
+    }));
+    $('#categoryGrid').innerHTML = categories.map(category => {
+      const { id, name, score } = category;
       const g = Scoring.grade(score);
-      return `<article class="category-card card"><span>${name}</span><strong>${score ?? '-'}점</strong><span class="grade-pill ${g.className}">${g.label}</span></article>`;
+      return `<button class="category-card card ${id === selectedCategory ? 'active' : ''}" data-category="${id}" aria-pressed="${id === selectedCategory}"><span>${name}</span><strong>${score ?? '-'}점</strong><span class="grade-level">${g.label}</span><span class="grade-pill grade-status ${g.className}">${g.status}</span></button>`;
     }).join('');
+    renderCategoryDetails(result);
+    updateFavoriteButton();
+  }
 
-    $('#metricGrid').innerHTML = Object.entries(selectedBeach.metrics).map(([key, value]) => {
-      const score = result.scores[key];
-      const [label, unit] = Scoring.metricMeta[key];
+  function renderCategoryDetails(result) {
+    const category = categoryDefinitions.find(item => item.id === selectedCategory) || categoryDefinitions[0];
+    const details = category.id === 'completeness'
+      ? categoryDefinitions.filter(item => item.id !== 'completeness').map(item => {
+          const filled = item.metricKeys.filter(key => selectedBeach.metrics[key] != null).length;
+          return { label: `${item.name} 데이터`, value: `${filled}/${item.metricKeys.length}개 입력`, score: Math.round(filled / item.metricKeys.length * 100) };
+        })
+      : category.metricKeys.map(key => ({
+          label: Scoring.metricMeta[key][0],
+          value: selectedBeach.metrics[key] == null ? '측정정보 없음' : `${selectedBeach.metrics[key]}${Scoring.metricMeta[key][1]}`,
+          score: result.scores[key]
+        }));
+
+    $('#metricTitle').textContent = `${category.name} 세부 점수`;
+    $('#metricHint').textContent = category.id === 'completeness' ? '분야별 입력된 데이터 비율' : '각 수치는 100점 만점으로 환산됩니다';
+    $('#metricGrid').innerHTML = details.map(({ label, value, score }) => {
       const g = Scoring.grade(score);
       const width = Number.isFinite(score) ? score : 0;
-      return `<article class="metric-card"><div class="metric-top"><div><strong>${label}</strong><div class="muted">${value == null ? '측정정보 없음' : `${value}${unit}`}</div></div><div class="metric-value">${score == null ? '-' : score}점</div></div><div class="progress"><span style="width:${width}%;background:${barColor(score)}"></span></div><span class="grade-pill ${g.className}">${g.label}</span></article>`;
+      return `<article class="metric-card"><div class="metric-top"><div><strong>${label}</strong><div class="muted">${value}</div></div><div class="metric-value">${score == null ? '-' : score}점</div></div><div class="progress"><span style="width:${width}%;background:${barColor(score)}"></span></div><span class="grade-pill ${g.className}">${g.label} · ${g.status}</span></article>`;
     }).join('');
-    updateFavoriteButton();
   }
 
   function createReason(result) {
@@ -90,6 +114,15 @@
     }));
   }
 
+  function setupCategoryCards() {
+    $('#categoryGrid').addEventListener('click', event => {
+      const card = event.target.closest('[data-category]');
+      if (!card) return;
+      selectedCategory = card.dataset.category;
+      renderBeach();
+    });
+  }
+
   function saveHistory(beach) {
     const history = JSON.parse(localStorage.getItem('badaCheckHistory') || '[]').filter(x => x.id !== beach.id);
     history.unshift({ id: beach.id, name: beach.name, checkedAt: new Date().toLocaleString('ko-KR') });
@@ -130,6 +163,6 @@
 
   function distance(lat1, lon1, lat2, lon2) { return Math.hypot(lat1-lat2, lon1-lon2); }
 
-  setupSearch(); setupNavigation(); setupHistory(); saveHistory(selectedBeach); renderBeach();
+  setupSearch(); setupNavigation(); setupHistory(); setupCategoryCards(); saveHistory(selectedBeach); renderBeach();
 })();
 
