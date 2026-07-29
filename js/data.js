@@ -58,6 +58,41 @@ window.BEACH_DATA = [
     id: "hoedong-reservoir", name: "회동수원지", location: "부산 금정구", waterType: "freshwater", lat: 35.2458, lng: 129.1215,
     measuredAt: "2026-07-28 07:30", source: "시연용 데이터 · 공공데이터 연동 예정",
     metrics: { ph: 7.52, temperature: 21.6, turbidity: 3.1, dissolvedOxygen: 7.3, salinity: 0.1, waterTest: "적합", waveHeight: 0.1, windSpeed: 2.2, ripCurrent: "낮음", rainfall: 0, airTemperature: 25.7, weatherAlert: "없음" }
+  },
+  {
+    id: "jangsan-valley", name: "장산계곡", location: "부산 해운대구", waterType: "freshwater", lat: 35.1835, lng: 129.1764,
+    measuredAt: "2026-07-28 07:00", source: "시연용 데이터 · 공공데이터 연동 예정",
+    metrics: { ph: 7.48, temperature: 20.1, turbidity: 2.9, dissolvedOxygen: 8.0, salinity: 0.1, waterTest: "적합", waveHeight: 0.3, windSpeed: 2.0, ripCurrent: "낮음", rainfall: 0, airTemperature: 24.9, weatherAlert: "없음" }
+  },
+  {
+    id: "seokdaecheon", name: "석대천", location: "부산 해운대구", waterType: "freshwater", lat: 35.2228, lng: 129.1327,
+    measuredAt: "2026-07-28 08:00", source: "시연용 데이터 · 공공데이터 연동 예정",
+    metrics: { ph: 7.26, temperature: 22.9, turbidity: 7.2, dissolvedOxygen: 5.9, salinity: 0.1, waterTest: "주의", waveHeight: 0.2, windSpeed: 2.8, ripCurrent: "낮음", rainfall: 3, airTemperature: 27.0, weatherAlert: "없음" }
+  },
+  {
+    id: "daecheon-stream", name: "대천천", location: "부산 북구", waterType: "freshwater", lat: 35.2936, lng: 129.0152,
+    measuredAt: "2026-07-28 07:30", source: "시연용 데이터 · 공공데이터 연동 예정",
+    metrics: { ph: 7.55, temperature: 20.7, turbidity: 3.2, dissolvedOxygen: 7.9, salinity: 0.1, waterTest: "적합", waveHeight: 0.3, windSpeed: 2.1, ripCurrent: "낮음", rainfall: 0, airTemperature: 25.4, weatherAlert: "없음" }
+  },
+  {
+    id: "jwagwangcheon", name: "좌광천", location: "부산 기장군", waterType: "freshwater", lat: 35.3217, lng: 129.1775,
+    measuredAt: "2026-07-28 08:00", source: "시연용 데이터 · 공공데이터 연동 예정",
+    metrics: { ph: 7.41, temperature: 22.5, turbidity: 4.6, dissolvedOxygen: 7.0, salinity: 0.1, waterTest: "적합", waveHeight: 0.2, windSpeed: 2.6, ripCurrent: "낮음", rainfall: 1, airTemperature: 26.3, weatherAlert: "없음" }
+  },
+  {
+    id: "samnakcheon", name: "삼락천", location: "부산 사상구", waterType: "freshwater", lat: 35.1758, lng: 128.9780,
+    measuredAt: "2026-07-28 08:00", source: "시연용 데이터 · 공공데이터 연동 예정",
+    metrics: { ph: 7.18, temperature: 24.3, turbidity: 8.1, dissolvedOxygen: 5.5, salinity: 0.1, waterTest: "주의", waveHeight: 0.2, windSpeed: 3.1, ripCurrent: "보통", rainfall: 3, airTemperature: 27.6, weatherAlert: "없음" }
+  },
+  {
+    id: "chuncheon", name: "춘천", location: "부산 해운대구 좌동", waterType: "freshwater", lat: 35.1664, lng: 129.1710,
+    measuredAt: "2026-07-28 08:00", source: "시연용 데이터 · 공공데이터 연동 예정",
+    metrics: { ph: 7.34, temperature: 23.5, turbidity: 6.1, dissolvedOxygen: 6.3, salinity: 0.1, waterTest: "주의", waveHeight: 0.2, windSpeed: 2.9, ripCurrent: "낮음", rainfall: 2, airTemperature: 27.3, weatherAlert: "없음" }
+  },
+  {
+    id: "dongcheon", name: "동천", location: "부산 부산진구", waterType: "freshwater", lat: 35.1434, lng: 129.0607,
+    measuredAt: "2026-07-28 08:00", source: "시연용 데이터 · 공공데이터 연동 예정",
+    metrics: { ph: 7.12, temperature: 24.7, turbidity: 9.4, dissolvedOxygen: 4.9, salinity: 0.1, waterTest: "주의", waveHeight: 0.1, windSpeed: 2.4, ripCurrent: "낮음", rainfall: 4, airTemperature: 28.1, weatherAlert: "없음" }
   }
 ];
 
