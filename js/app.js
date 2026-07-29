@@ -101,14 +101,16 @@
   function setupSearch() {
     const input = $('#beachSearch');
     input.value = selectedBeach.name;
-    input.addEventListener('input', () => {
-      const q = input.value.trim();
-      const matches = BEACH_DATA.filter(b => b.name.includes(q) || b.location.includes(q));
+    function showMatches(query) {
+      const q = query.trim();
+      const matches = BEACH_DATA.filter(b => !q || b.name.includes(q) || b.location.includes(q));
       const box = $('#autocomplete');
-      if (!q || !matches.length) return box.classList.add('hidden');
+      if (!matches.length) return box.classList.add('hidden');
       box.innerHTML = matches.map(b => `<button data-beach-id="${b.id}">${b.name}<br><small>${b.location}</small></button>`).join('');
       box.classList.remove('hidden');
-    });
+    }
+    input.addEventListener('focus', () => showMatches(input.value));
+    input.addEventListener('input', () => showMatches(input.value));
     $('#autocomplete').addEventListener('click', e => {
       const button = e.target.closest('[data-beach-id]');
       if (button) selectBeach(BEACH_DATA.find(b => b.id === button.dataset.beachId));
