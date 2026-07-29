@@ -93,3 +93,10 @@ footer { margin-top: 24px; padding: 16px; color: var(--muted); font-size: 12px; 
   .quick-shower { align-items: stretch; flex-direction: column; }
 }
 
+
+.header-actions { display: flex; align-items: center; gap: 10px; }
+.language-switcher { display: flex; overflow: hidden; border: 1px solid #b7dce8; border-radius: 12px; background: white; }
+.language-button { padding: 7px 8px; border: 0; border-right: 1px solid #dcebf0; background: white; color: var(--muted); font-size: 11px; font-weight: 800; }
+.language-button:last-child { border-right: 0; }
+.language-button.active { background: var(--blue); color: white; }
+@media (max-width: 420px) { .app-header { gap: 8px; } .header-actions { gap: 6px; } .language-button { padding: 6px 5px; font-size: 10px; } }
