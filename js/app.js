@@ -10,6 +10,10 @@
     { id: 'completeness', name: '데이터 완성도', metricKeys: [] }
   ];
 
+  function visibleMetricKeys(category) {
+    return category.metricKeys.filter(key => !(selectedBeach.waterType === 'freshwater' && key === 'salinity'));
+  }
+
   function selectBeach(beach) {
     selectedBeach = beach;
     $('#beachSearch').value = beach.name;
@@ -32,6 +36,7 @@
 
     const categories = categoryDefinitions.map(category => ({
       ...category,
+      metricKeys: visibleMetricKeys(category),
       score: category.id === 'completeness' ? dataCompleteness(selectedBeach) : result.categories[category.id]
     }));
     $('#categoryGrid').innerHTML = categories.map(category => {
@@ -47,10 +52,11 @@
     const category = categoryDefinitions.find(item => item.id === selectedCategory) || categoryDefinitions[0];
     const details = category.id === 'completeness'
       ? categoryDefinitions.filter(item => item.id !== 'completeness').map(item => {
-          const filled = item.metricKeys.filter(key => selectedBeach.metrics[key] != null).length;
-          return { label: `${item.name} 데이터`, value: `${filled}/${item.metricKeys.length}개 입력`, score: Math.round(filled / item.metricKeys.length * 100) };
+          const metricKeys = visibleMetricKeys(item);
+          const filled = metricKeys.filter(key => selectedBeach.metrics[key] != null).length;
+          return { label: `${item.name} 데이터`, value: `${filled}/${metricKeys.length}개 입력`, score: Math.round(filled / metricKeys.length * 100) };
         })
-      : category.metricKeys.map(key => ({
+      : visibleMetricKeys(category).map(key => ({
           key,
           label: Scoring.metricMeta[key][0],
           value: selectedBeach.metrics[key] == null ? '측정정보 없음' : `${selectedBeach.metrics[key]}${Scoring.metricMeta[key][1]}`,
