@@ -41,6 +41,7 @@
 
   function renderBeach() {
     document.body.dataset.waterPlace = selectedBeach.id;
+    if (window.parent !== window) window.parent.postMessage({ type: 'bada-check-place', id: selectedBeach.id }, '*');
     const result = Scoring.evaluateBeach(selectedBeach);
     $('#beachName').textContent = selectedBeach.name;
     $('#beachLocation').textContent = selectedBeach.location;
