@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#066b87" />
+    <title>바다 체크 | 안전한 바다 여행의 시작</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      body[data-beach="gwangalli"] { background: linear-gradient(180deg, rgba(5, 18, 48, .35), rgba(236, 250, 249, .9)), url("https://giftedu42-commits.github.io/ocean-/assets/gwangalli-night.png") center top / cover fixed no-repeat; }
+      body[data-beach="gwangalli"] .sun, body[data-beach="gwangalli"] .wave { display: none; }
+      body[data-beach="gwangalli"] .hero h1, body[data-beach="gwangalli"] .hero .subtitle { text-shadow: 0 2px 14px rgba(255,255,255,.8); }
+      body[data-beach="gwangalli"] .detail, body[data-beach="gwangalli"] .shower-card { background: rgba(255,255,255,.94); backdrop-filter: blur(9px); }
+      /* Keep Haeundae's supplied photo above the general beach background rules. */
+      body[data-beach="haeundae"] { background: linear-gradient(180deg, rgba(255,255,255,.16), rgba(235,248,249,.88)), url("./https://giftedu42-commits.github.io/ocean-/assets/haeundae-beach.png") center center / cover fixed no-repeat !important; }
+      body[data-beach="haeundae"] .sun, body[data-beach="haeundae"] .wave { display: none; }
+      body[data-beach="haeundae"] .detail, body[data-beach="haeundae"] .shower-card { background: rgba(255,255,255,.92); backdrop-filter: blur(9px); }
+      /* Keep Dadaepo's supplied sunset photo above the general beach background rules. */
+      body[data-beach="dadaepo"] { background: linear-gradient(180deg, rgba(25,16,15,.16), rgba(249,239,221,.88)), url("./https://giftedu42-commits.github.io/ocean-/assets/dadaepo-sunset.png") center center / cover fixed no-repeat !important; }
+      body[data-beach="dadaepo"] .sun, body[data-beach="dadaepo"] .wave { display: none; }
+      body[data-beach="dadaepo"] .detail, body[data-beach="dadaepo"] .shower-card { background: rgba(255,255,255,.92); backdrop-filter: blur(9px); }
+      /* Keep Songdo's supplied cable-car photo above the general beach background rules. */
+      body[data-beach="songdo"] { background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(232,247,247,.88)), url("./https://giftedu42-commits.github.io/ocean-/assets/songdo-cablecar.png") center center / cover fixed no-repeat !important; }
+      body[data-beach="songdo"] .sun, body[data-beach="songdo"] .wave { display: none; }
+      body[data-beach="songdo"] .detail, body[data-beach="songdo"] .shower-card { background: rgba(255,255,255,.92); backdrop-filter: blur(9px); }
+      /* Keep Songjeong's supplied photo above the general beach background rules. */
+      body[data-beach="songjeong"] { background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(238,249,239,.88)), url("./https://giftedu42-commits.github.io/ocean-/assets/songjeong-beach.png") center center / cover fixed no-repeat !important; }
+      body[data-beach="songjeong"] .sun, body[data-beach="songjeong"] .wave { display: none; }
+      body[data-beach="songjeong"] .detail, body[data-beach="songjeong"] .shower-card { background: rgba(255,255,255,.92); backdrop-filter: blur(9px); }
+      .metric-score-chart { border-top: 1px solid #e4eeee; margin-top: 14px; padding-top: 13px; }
+      .metric-score-chart h3 { color: #173f49; font-size: .82rem; margin: 0 0 10px; }
+      .metric-bar { margin: 8px 0; }
+      .metric-bar > div { display: flex; justify-content: space-between; color: #527078; font-size: .7rem; margin-bottom: 4px; }
+      .metric-bar b { color: #103f4b; }
+      .metric-bar i { background: #edf3f3; border-radius: 99px; display: block; height: 8px; overflow: hidden; }
+      .metric-bar em { border-radius: 99px; display: block; height: 100%; }
+      .metric-bar em.good { background: #45bf82; }
+      .metric-bar em.normal { background: #f2ca4e; }
+      .metric-bar em.bad { background: #ea6358; }
+      .metric-value.safe { color: #198754; }
+      .metric-value.normal { color: #b87c00; }
+      .metric-value.danger { color: #d74b45; }
+      .metric-value.critical { color: #a62929; }
+      .metric-status { display: block; font-size: .66rem; font-weight: 700; margin-top: 4px; }
+      .metric-status.safe { color: #198754; }
+      .metric-status.normal { color: #b87c00; }
+      .metric-status.danger { color: #d74b45; }
+      .metric-status.critical { color: #a62929; }
+      .metric-help { background: none; border: 0; color: #d74b45; cursor: pointer; font-size: .92rem; font-weight: 900; line-height: 1; margin-left: 3px; padding: 0 2px; vertical-align: baseline; }
+      .metric-definition { background: #fff4f1; border: 1px solid #ffd7cf; border-radius: 10px; color: #70403a; font-size: .76rem; line-height: 1.55; margin: -8px 0 18px; padding: 10px 12px; }
+      .info-dialog { box-sizing: border-box; max-height: 90vh; overflow-y: auto; width: min(92vw, 560px); }
+    </style>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="sun"></div><div class="wave wave-a"></div><div class="wave wave-b"></div>
+    <main class="app-shell">
+      <header>
+        <a class="brand" href="#top" aria-label="바다 체크 홈"><span>🌊</span><strong>바다 체크</strong></a>
+        <div class="language" aria-label="언어 선택">
+          <button data-lang="ko" class="active">한국어</button><button data-lang="en">EN</button><button data-lang="ja">日本語</button><button data-lang="zh">中文</button>
+        </div>
+      </header>
+
+      <section id="top" class="hero">
+        <p class="eyebrow" data-i18n="eyebrow">BEACH SAFETY GUIDE</p>
+        <h1 data-i18n="title">안전한 바다 여행의 시작</h1>
+        <p class="subtitle" data-i18n="subtitle">오늘의 바다 상태를 확인하고, 더 가볍게 떠나세요.</p>
+        <label class="search"><span>⌕</span><input id="beachSearch" data-i18n-placeholder="search" placeholder="해수욕장 검색" autocomplete="off" /></label>
+        <div id="beachList" class="beach-list" aria-label="해수욕장 목록"></div>
+      </section>
+
+      <section id="beachDetail" class="detail" aria-live="polite">
+        <div class="detail-top">
+          <div><p class="location-tag" id="region"></p><h2 id="beachName"></h2><p id="updated"></p></div>
+          <div id="scoreBadge" class="score-badge"><span id="face">😊</span><strong id="score">92</strong><small>/100</small></div>
+        </div>
+        <div class="recommendation"><span id="recommendIcon">☀️</span><p id="recommendationText"></p></div>
+        <div class="stats">
+          <button class="stat-card" id="waterCard" type="button"><span>💧</span><div><p data-i18n="water">수질 상태</p><strong id="waterStatus"></strong><small data-i18n="details">자세히 보기</small></div></button>
+          <article><span>☁️</span><div><p data-i18n="weather">날씨</p><strong id="weatherStatus"></strong></div></article>
+          <article><span>🌡️</span><div><p data-i18n="temperature">수온</p><strong id="temperature"></strong></div></article>
+          <article><span>🌊</span><div><p data-i18n="waves">파도</p><strong id="waveStatus"></strong></div></article>
+        </div>
+      </section>
+
+      <section class="shower-section">
+        <div class="section-heading"><div><p class="eyebrow" data-i18n="facility">BEACH FACILITY</p><h2 data-i18n="showerTitle">샤워실 대기 현황</h2></div><span class="live"><i></i><span data-i18n="live">실시간</span></span></div>
+        <div class="shower-card">
+          <div class="shower-icon">🚿</div>
+          <div class="queue-summary"><h3 id="showerBeach"></h3><p class="shower-location" id="showerLocation"></p><p id="queueMessage"></p><div class="queue-metrics"><span><b id="users">18</b><small data-i18n="using">현재 이용자</small></span><span><b id="waiting">27</b><small data-i18n="waiting">대기자</small></span><span><b id="minutes">20분</b><small data-i18n="waitTime">예상 대기</small></span></div><p class="expected-time" id="expectedAt"></p><p class="my-reservation" id="myReservation" hidden></p><div class="reservation-actions" id="reservationActions" hidden><button id="enterShower" type="button" data-i18n="enter">입장 확인</button><button id="exitShower" type="button" data-i18n="exit" disabled>퇴장 확인</button></div></div>
+          <button id="openQueue" class="primary" data-i18n="join">대기 등록하기</button>
+        </div>
+      </section>
+
+      <p class="note" data-i18n="note">안전 정보는 참고용입니다. 현장 안내 및 안전요원의 지시를 우선해 주세요.</p>
+    </main>
+
+    <dialog id="queueDialog">
+      <form id="queueForm" method="dialog">
+        <button class="close" type="button" id="closeDialog" aria-label="닫기">×</button>
+        <p class="eyebrow" data-i18n="reservation">SHOWER RESERVATION</p><h2 data-i18n="formTitle">샤워 대기 등록</h2><p id="formDescription"></p>
+        <label><span data-i18n="room">샤워실 선택</span><select id="showerType"><option value="male" data-i18n="male">남자 샤워실</option><option value="female" data-i18n="female">여자 샤워실</option></select></label>
+        <label><span data-i18n="party">이용 인원</span><select id="party"><option value="1" data-party="1">1명</option><option value="2" data-party="2">2명</option><option value="3" data-party="3">3명</option><option value="4" data-party="4">4명</option></select></label>
+        <label><span data-i18n="phone">연락처</span><input id="phone" inputmode="tel" placeholder="010-0000-0000" required /></label>
+        <label class="consent"><input id="consent" type="checkbox" required /><span data-i18n="consent">개인정보 이용에 동의합니다.</span></label>
+        <button class="primary wide" type="submit" data-i18n="register">등록하기</button>
+      </form>
+    </dialog>
+    <dialog id="mapDialog" class="info-dialog"><button class="close" type="button" data-close-dialog="mapDialog" aria-label="닫기">×</button><p class="eyebrow">LOCATION</p><h2 id="mapTitle"></h2><div class="map-preview" style="position:relative;height:250px;margin:18px 0;border-radius:16px;overflow:hidden;background:linear-gradient(120deg,#d9efc3 0 42%,#91dce5 42%);border:1px solid #b8dcda"><svg viewBox="0 0 400 250" width="100%" height="100%" aria-label="샤워실 위치 지도"><defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8Z" fill="#ff775f"/></marker></defs><path d="M26 198 C95 170,92 78,181 105 S244 160,332 67" fill="none" stroke="#ff775f" stroke-width="7" stroke-linecap="round" stroke-dasharray="1 12" marker-end="url(#arrow)"/><circle cx="26" cy="198" r="12" fill="#063548"/><text x="43" y="205" fill="#063548" font-size="15" font-weight="700">현재 위치</text><circle cx="332" cy="67" r="17" fill="#ff775f"/><text x="325" y="74" fill="white" font-size="18">🚿</text><text x="240" y="42" fill="#063548" font-size="15" font-weight="700">샤워실</text></svg><p id="mapAddress" style="position:absolute;left:12px;bottom:3px;margin:0;background:#ffffffdf;padding:7px 9px;border-radius:8px;font-size:.75rem;font-weight:700"></p></div><p id="mapNote"></p></dialog>
+    <dialog id="waterDialog" class="info-dialog"><button class="close" type="button" data-close-dialog="waterDialog" aria-label="닫기">×</button><p class="eyebrow" id="waterLabel">WATER QUALITY</p><h2 id="waterTitle"></h2><div id="waterGrade" class="water-grade"></div><div id="waterGraph" hidden></div><div id="waterMetrics" class="water-metrics"></div><div id="metricDefinition" class="metric-definition" role="status" hidden></div><div class="water-details"><div><span id="testLabel">공식 수질 검사</span><strong id="testValue"></strong></div><div><span id="ripLabel">이안류 위험성</span><strong id="ripValue"></strong></div></div><p id="waterAdvice"></p></dialog>
+    <div id="toast" role="status"></div>
+    <script src="script.js"></script>
+    <script>
+      Object.assign(translations.ko, { details: '자세히 보기' });
+      Object.assign(translations.en, { details: 'View details' });
+      Object.assign(translations.ja, { details: '詳細を見る' });
+      Object.assign(translations.zh, { details: '查看详情' });
+      Object.assign(waterText.ko, { categoryScores: '항목별 수질 점수' });
+      Object.assign(waterText.en, { categoryScores: 'Scores by water-quality category' });
+      Object.assign(waterText.ja, { categoryScores: '項目別の水質スコア' });
+      Object.assign(waterText.zh, { categoryScores: '各项水质评分' });
+
+      const metricScoreByBeach = {
+        gwangalli: [96, 92, 98, 94, 90, 97, 99], haeundae: [85, 88, 78, 82, 89, 81, 76],
+        songjeong: [87, 89, 82, 86, 88, 84, 79], dadaepo: [62, 76, 38, 58, 71, 45, 42], songdo: [94, 91, 95, 93, 90, 96, 97]
+      };
+      const safetyClass = score => score >= 80 ? 'safe' : score >= 60 ? 'normal' : score >= 40 ? 'danger' : 'critical';
+      const safetyLabel = {
+        ko: { safe: '안전', normal: '보통', danger: '위험', critical: '매우 위험' },
+        en: { safe: 'Safe', normal: 'Moderate', danger: 'Risky', critical: 'Very risky' },
+        ja: { safe: '安全', normal: '普通', danger: '危険', critical: '非常に危険' },
+        zh: { safe: '安全', normal: '一般', danger: '危险', critical: '非常危险' }
+      };
+      const metricDefinitions = {
+        ko: { ph: 'pH 농도: 물이 산성인지 알칼리성인지 나타내는 수치입니다.', turbidity: '탁도: 물이 얼마나 맑은지 나타내는 수치입니다. 수치가 낮을수록 물이 더 맑습니다.', oxygen: '용존산소: 물속에 녹아 있는 산소의 양입니다. 물고기와 해양 생물이 살기 좋은 정도를 알 수 있어요.', phosphorus: '총인: 물속 영양염류의 양입니다. 수치가 너무 높으면 녹조나 오염 가능성을 살펴봐야 합니다.' },
+        en: { ph: 'pH: a measure of how acidic or alkaline the water is.', turbidity: 'Turbidity: a measure of how clear the water is. Lower values mean clearer water.', oxygen: 'Dissolved oxygen: the amount of oxygen mixed into the water, which supports marine life.', phosphorus: 'Total phosphorus: the amount of nutrients in the water. High levels can indicate pollution risk.' },
+        ja: { ph: 'pH濃度: 水が酸性かアルカリ性かを示す数値です。', turbidity: '濁度: 水の透明度を示す数値です。低いほど水が澄んでいます。', oxygen: '溶存酸素: 水に溶けている酸素の量です。海の生き物が暮らしやすい目安になります。', phosphorus: '全リン: 水中の栄養塩類の量です。高すぎる場合は汚染の可能性を確認します。' },
+        zh: { ph: 'pH值：表示水呈酸性还是碱性的数值。', turbidity: '浊度：表示水清澈程度的数值。数值越低，水越清澈。', oxygen: '溶解氧：溶解在水中的氧气量，可反映海洋生物适宜生存的程度。', phosphorus: '总磷：水中营养盐的含量。数值过高时需要留意污染风险。' }
+      };
+      const renderMetricScoreGraph = () => {
+        const labels = waterText[lang], scores = metricScoreByBeach[selected.key].slice(0, 6);
+        return '<section class="metric-score-chart"><h3>' + labels.categoryScores + '</h3>' + scores.map((score, index) =>
+          '<div class="metric-bar"><div><span>' + labels[metricKeys[index]] + '</span><b>' + score + '</b></div><i><em class="' + (score >= 80 ? 'good' : score >= 60 ? 'normal' : 'bad') + '" style="width:' + score + '%"></em></i></div>'
+        ).join('') + '</section>';
+      };
+      const renderWaterMetrics = () => {
+        const labels = waterText[lang], scores = metricScoreByBeach[selected.key], values = waterInfo[selected.key].metrics.slice(0, 6);
+        return values.map((item, index) => {
+          const state = safetyClass(scores[index]);
+          const key = metricKeys[index], help = ['ph', 'turbidity', 'oxygen', 'phosphorus'].includes(key) ? '<button class="metric-help" type="button" data-help="' + key + '" aria-label="Learn more">*</button>' : '';
+          return '<div class="metric"><span>' + labels[key] + help + '</span><strong class="metric-value ' + state + '">' + item.split('|')[1] + '</strong><small class="metric-status ' + state + '">' + safetyLabel[lang][state] + '</small></div>';
+        }).join('');
+      };
+      $('waterCard').addEventListener('click', () => {
+        $('waterGraph').innerHTML = renderMetricScoreGraph();
+        $('waterMetrics').innerHTML = renderWaterMetrics();
+        $('metricDefinition').hidden = true;
+      });
+      $('waterMetrics').addEventListener('click', event => {
+        const help = event.target.closest('[data-help]');
+        if (!help) return;
+        const definition = $('metricDefinition');
+        definition.textContent = metricDefinitions[lang][help.dataset.help];
+        definition.hidden = false;
+      });
+      const mapTitleWord = { ko: '샤워실', en: 'Shower room', ja: 'シャワー室', zh: '淋浴间' };
+      $('showerLocation').addEventListener('click', () => {
+        $('mapTitle').textContent = beachText(selected)[0] + ' · ' + mapTitleWord[lang];
+      });
+    </script>
+    <style>
+      #waterDialog { padding: 28px 26px 30px; }
+      #waterDialog .eyebrow { margin: 0 0 8px; }
+      #waterDialog h2 { margin: 0 34px 16px 0; line-height: 1.3; }
+      #waterDialog .water-grade { margin: 0 0 18px; }
+      #waterDialog .water-metrics { gap: 12px; margin: 18px 0 22px; }
+      #waterDialog .water-metrics .metric { padding: 12px; }
+      #waterDialog .water-details { gap: 12px; margin: 0 0 20px; }
+      #waterDialog .water-details > div { padding: 12px; }
+      #waterDialog #waterAdvice { border-top: 1px solid #e4eeee; line-height: 1.65; margin: 0; padding-top: 18px; }
+      @media (max-width: 480px) { #waterDialog { padding: 24px 20px 26px; } }
+    </style>
+  </body>
+</html>
