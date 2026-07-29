@@ -61,54 +61,6 @@
           <p class="source" id="dataSource"></p>
         </section>
 
-        <section class="card quick-shower" id="quickShowerCard">
-          <div>
-            <p class="eyebrow">SHOWER QUEUE</p>
-            <h3>샤워실 현재 현황</h3>
-            <p id="quickShowerSummary"></p>
-          </div>
-          <button class="primary-button" data-target="showerView">샤워실 보기</button>
-        </section>
-      </section>
-
-      <section id="showerView" class="view">
-        <div class="section-title-row">
-          <div>
-            <p class="eyebrow">LIVE SHOWER STATUS</p>
-            <h2 id="showerBeachName">샤워실</h2>
-          </div>
-          <span class="live-badge">● 실시간 갱신</span>
-        </div>
-
-        <section class="status-grid">
-          <article class="status-card"><span>전체 샤워실</span><strong>20개</strong></article>
-          <article class="status-card"><span>현재 샤워 중</span><strong id="currentUsers">0명</strong></article>
-          <article class="status-card"><span>이용 가능</span><strong id="availableRooms">20개</strong></article>
-          <article class="status-card"><span>대기자</span><strong id="waitingUsers">0명</strong></article>
-        </section>
-
-        <section class="waiting-card card">
-          <p class="muted">예상 소요시간</p>
-          <strong id="estimatedTime">바로 이용 가능</strong>
-          <p id="peopleSummary"></p>
-          <p id="calculationDescription" class="muted"></p>
-        </section>
-
-        <section class="button-group">
-          <button id="enterButton" class="enter-button">입장</button>
-          <button id="exitButton" class="exit-button">퇴장</button>
-        </section>
-        <p id="showerMessage" class="message" aria-live="polite"></p>
-
-        <section class="card">
-          <h3>계산 방식</h3>
-          <p>샤워실은 한 번에 20명이 이용합니다. 평균 이용시간은 10분으로 계산합니다.</p>
-          <p>20명 이하이면 바로 입장하고, 20명을 초과한 인원은 대기자로 자동 포함됩니다. 입장 또는 퇴장 버튼을 누를 때마다 인원과 예상시간이 즉시 다시 계산됩니다.</p>
-        </section>
-
-        <button id="resetShowerBtn" class="secondary-button full-width">시연 데이터 초기화</button>
-      </section>
-
       <section id="historyView" class="view">
         <h2>최근 확인 기록</h2>
         <div id="historyList" class="history-list"></div>
@@ -118,7 +70,6 @@
     <nav class="bottom-nav">
       <button class="nav-button active" data-target="homeView">🏠<span>홈</span></button>
       <button class="nav-button" data-target="homeView">🛟<span>바다 안전</span></button>
-      <button class="nav-button" data-target="showerView">🚿<span>샤워실</span></button>
       <button class="nav-button" data-target="historyView">🕘<span>기록</span></button>
     </nav>
 
@@ -129,7 +80,6 @@
 
   <script src="js/data.js"></script>
   <script src="js/scoring.js"></script>
-  <script src="js/shower.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
