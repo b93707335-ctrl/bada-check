@@ -150,3 +150,12 @@ body { background-image:none !important; }
 .secondary-button { border-radius:18px; box-shadow:0 10px 22px rgba(2,48,62,.14); }
 .autocomplete { max-width:560px; left:50%; transform:translateX(-50%); width:calc(100% - 28px); text-align:left; }
 .app-header { margin-bottom:12px; }
+
+
+/* 검색창: 카드/내 주변 버튼 제거, 한 줄 검색 디자인 */
+.search-section.card { background:transparent !important; border:0 !important; box-shadow:none !important; margin:0 auto 18px !important; max-width:560px; padding:0 !important; }
+.search-section > label { display:none !important; }
+.search-row { position:relative; display:block !important; }
+.search-row::before { color:#0077b6; content:"⌕"; font-size:25px; font-weight:400; left:17px; line-height:1; position:absolute; top:14px; z-index:2; }
+.search-row input { background:rgba(255,255,255,.96) !important; border:0 !important; border-radius:16px !important; box-shadow:0 10px 24px rgba(3,53,72,.18) !important; min-height:52px; padding:14px 18px 14px 48px !important; width:100%; }
+#locationBtn { display:none !important; }
