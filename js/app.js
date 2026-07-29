@@ -51,17 +51,21 @@
           return { label: `${item.name} 데이터`, value: `${filled}/${item.metricKeys.length}개 입력`, score: Math.round(filled / item.metricKeys.length * 100) };
         })
       : category.metricKeys.map(key => ({
+          key,
           label: Scoring.metricMeta[key][0],
           value: selectedBeach.metrics[key] == null ? '측정정보 없음' : `${selectedBeach.metrics[key]}${Scoring.metricMeta[key][1]}`,
-          score: result.scores[key]
+          score: result.scores[key],
+          definition: Scoring.metricDefinitions[key]
         }));
 
     $('#metricTitle').textContent = `${category.name} 세부 점수`;
     $('#metricHint').textContent = category.id === 'completeness' ? '분야별 입력된 데이터 비율' : '각 수치는 100점 만점으로 환산됩니다';
-    $('#metricGrid').innerHTML = details.map(({ label, value, score }) => {
+    $('#metricGrid').innerHTML = details.map(({ key, label, value, score, definition }) => {
       const g = Scoring.grade(score);
       const width = Number.isFinite(score) ? score : 0;
-      return `<article class="metric-card"><div class="metric-top"><div><strong>${label}</strong><div class="muted">${value}</div></div><div class="metric-value">${score == null ? '-' : score}점</div></div><div class="progress"><span style="width:${width}%;background:${barColor(score)}"></span></div><span class="grade-pill ${g.className}">${g.label} · ${g.status}</span></article>`;
+      const help = definition ? `<button class="term-help" type="button" data-definition-key="${key}" aria-expanded="false" aria-label="${label} 뜻 보기">＊</button>` : '';
+      const definitionPanel = definition ? `<p class="term-definition hidden" data-definition-panel="${key}">${definition}</p>` : '';
+      return `<article class="metric-card"><div class="metric-top"><div><strong>${label}${help}</strong><div class="muted">${value}</div></div><div class="metric-value">${score == null ? '-' : score}점</div></div><div class="progress"><span style="width:${width}%;background:${barColor(score)}"></span></div><span class="grade-pill ${g.className}">${g.label} · ${g.status}</span>${definitionPanel}</article>`;
     }).join('');
   }
 
@@ -123,6 +127,17 @@
     });
   }
 
+  function setupTermDefinitions() {
+    $('#metricGrid').addEventListener('click', event => {
+      const button = event.target.closest('[data-definition-key]');
+      if (!button) return;
+      const panel = $(`[data-definition-panel="${button.dataset.definitionKey}"]`);
+      const isHidden = panel.classList.contains('hidden');
+      panel.classList.toggle('hidden', !isHidden);
+      button.setAttribute('aria-expanded', String(isHidden));
+    });
+  }
+
   function saveHistory(beach) {
     const history = JSON.parse(localStorage.getItem('badaCheckHistory') || '[]').filter(x => x.id !== beach.id);
     history.unshift({ id: beach.id, name: beach.name, checkedAt: new Date().toLocaleString('ko-KR') });
@@ -163,6 +178,6 @@
 
   function distance(lat1, lon1, lat2, lon2) { return Math.hypot(lat1-lat2, lon1-lon2); }
 
-  setupSearch(); setupNavigation(); setupHistory(); setupCategoryCards(); saveHistory(selectedBeach); renderBeach();
+  setupSearch(); setupNavigation(); setupHistory(); setupCategoryCards(); setupTermDefinitions(); saveHistory(selectedBeach); renderBeach();
 })();
 
