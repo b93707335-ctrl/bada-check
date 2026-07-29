@@ -53,7 +53,7 @@
     });
     if (beach.waterType === "freshwater") scores.salinity = linearPenalty(beach.metrics.salinity, 0, 0.5, 0, 2);
     const waterKeys = ["ph", "temperature", "turbidity", "dissolvedOxygen", "salinity", "waterTest"]
-      .filter(key => !(beach.waterType === "freshwater" && key === "salinity"));
+      .filter(key => !(beach.waterType && key === "salinity"));
     const categories = {
       water: average(waterKeys.map(key => scores[key])),
       marine: average([scores.waveHeight, scores.windSpeed, scores.ripCurrent]),
