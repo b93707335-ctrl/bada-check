@@ -5,28 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0077b6" />
   <title>바다체크 | 바다도 체크하고, 안전도 체크!</title>
-  <link rel="stylesheet" href="css/style.css?v=20260729-8" />
+  <link rel="stylesheet" href="css/style.css?v=20260729-9" />
 </head>
 <body>
   <div class="app-shell">
     <header class="app-header">
       <div>
         <p class="eyebrow">BADA CHECK</p>
-        <h1>🌊 바다체크</h1>
-        <p class="tagline">바다도 체크하고, 안전도 체크!</p>
+        <h1 data-i18n="appName">🌊 바다체크</h1>
+        <p class="tagline" data-i18n="tagline">바다도 체크하고, 안전도 체크!</p>
       </div>
-      <button id="favoriteBtn" class="icon-button" aria-label="즐겨찾기">☆</button>
+      <div class="header-actions"><div class="language-switcher" role="group" aria-label="언어 선택"><button class="language-button active" data-language="ko">한국어</button><button class="language-button" data-language="ja">日本語</button><button class="language-button" data-language="zh">中文</button></div><button id="favoriteBtn" class="icon-button" aria-label="즐겨찾기">☆</button></div>
     </header>
 
     <main>
       <section id="homeView" class="view active">
-        <div class="notice">현재 화면에는 시연용 데이터가 포함되어 있습니다.</div>
+        <div class="notice" data-i18n="notice">현재 화면에는 시연용 데이터가 포함되어 있습니다.</div>
 
         <section class="search-section card">
-          <label for="beachSearch">가고 싶은 물놀이 장소를 검색하세요.</label>
+          <label for="beachSearch" data-i18n="searchLabel">가고 싶은 물놀이 장소를 검색하세요.</label>
           <div class="search-row">
             <input id="beachSearch" type="search" placeholder="예: 해운대해수욕장, 대천천 애기소" autocomplete="off" />
-            <button id="locationBtn" class="secondary-button">내 주변</button>
+            <button id="locationBtn" class="secondary-button" data-i18n="nearby">내 주변</button>
           </div>
           <div id="autocomplete" class="autocomplete hidden"></div>
         </section>
@@ -37,7 +37,7 @@
               <p class="eyebrow">LOCATION MAP</p>
               <h3 id="mapLocationName">해운대해수욕장 위치</h3>
             </div>
-            <span class="muted">선택한 장소</span>
+            <span class="muted" data-i18n="selectedPlace">선택한 장소</span>
           </div>
           <iframe id="locationMap" title="선택한 장소 지도" loading="lazy"></iframe>
         </section>
@@ -50,7 +50,7 @@
           </div>
           <div class="score-ring" id="overallScoreRing">
             <strong id="overallScore">-</strong>
-            <span>종합점수</span>
+            <span data-i18n="overallScore">종합점수</span>
           </div>
           <div id="overallGrade" class="grade-pill">-</div>
           <p id="overallReason" class="reason"></p>
@@ -67,31 +67,31 @@
         </section>
 
         <section class="card">
-          <h3>안전 안내</h3>
+          <h3 data-i18n="safetyGuide">안전 안내</h3>
           <p id="actionGuide"></p>
           <p class="source" id="dataSource"></p>
         </section>
 
       <section id="historyView" class="view">
-        <h2>최근 확인 기록</h2>
+        <h2 data-i18n="history">최근 확인 기록</h2>
         <div id="historyList" class="history-list"></div>
       </section>
     </main>
 
     <nav class="bottom-nav">
-      <button class="nav-button active" data-target="homeView">🏠<span>홈</span></button>
-      <button class="nav-button" data-target="homeView">🛟<span>바다 안전</span></button>
-      <button class="nav-button" data-target="historyView">🕘<span>기록</span></button>
+      <button class="nav-button active" data-target="homeView">🏠<span data-i18n="home">홈</span></button>
+      <button class="nav-button" data-target="homeView">🛟<span data-i18n="waterSafety">바다 안전</span></button>
+      <button class="nav-button" data-target="historyView">🕘<span data-i18n="history">기록</span></button>
     </nav>
 
     <footer>
-      바다체크의 정보는 참고용입니다. 실제 물놀이 전 현장 통제, 기상특보 및 안전요원의 안내를 반드시 확인하세요.
+      <span data-i18n="footer">바다체크의 정보는 참고용입니다. 실제 물놀이 전 현장 통제, 기상특보 및 안전요원의 안내를 반드시 확인하세요.</span>
     </footer>
   </div>
 
-  <script src="js/data.js?v=20260729-12"></script>
-  <script src="js/scoring.js?v=20260729-12"></script>
-  <script src="js/app.js?v=20260729-12"></script>
+  <script src="js/data.js?v=20260729-13"></script>
+  <script src="js/scoring.js?v=20260729-13"></script>
+  <script src="js/app.js?v=20260729-13"></script>
 </body>
 </html>
 
