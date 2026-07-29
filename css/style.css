@@ -107,3 +107,21 @@ body { background-attachment: fixed; background-size: cover; background-position
 body[data-water-place="gwangalli"], body[data-water-place="haeundae"], body[data-water-place="songjeong"], body[data-water-place="songdo"], body[data-water-place="dadaepo"] { background-image: linear-gradient(rgba(232,250,255,.82),rgba(238,250,255,.9)), url("https://giftedu42-commits.github.io/ocean-/assets/gwangalli-night.png"); }
 body[data-water-place="jangsan-valley"], body[data-water-place="unsusa-valley"], body[data-water-place="daecheon-aegiso"] { background-image: linear-gradient(rgba(235,251,244,.84),rgba(243,253,249,.92)), url("https://images.unsplash.com/photo-1439853949127-fa647821eba0?auto=format&fit=crop&w=1600&q=80"); }
 body[data-water-place="nakdong-hwamyeong"], body[data-water-place="nakdong-samnak"], body[data-water-place="suyeong-river"], body[data-water-place="oncheoncheon"], body[data-water-place="seokdaecheon"], body[data-water-place="daecheon-stream"], body[data-water-place="jwagwangcheon"], body[data-water-place="samnakcheon"], body[data-water-place="chuncheon"], body[data-water-place="dongcheon"], body[data-water-place="hoedong-reservoir"] { background-image: linear-gradient(rgba(235,248,250,.84),rgba(242,252,249,.92)), url("https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=1600&q=80"); }
+
+
+/* 자연 배경과 어울리는 통일 카드 테마 */
+body { min-height:100vh; }
+body::before { content:""; position:fixed; inset:0; z-index:-1; background:linear-gradient(180deg,rgba(8,46,68,.12),rgba(235,250,251,.46) 42%,rgba(235,250,251,.88)); pointer-events:none; }
+.app-shell { position:relative; }
+.app-header { padding:14px 16px; border:1px solid rgba(255,255,255,.62); border-radius:22px; background:rgba(255,255,255,.58); backdrop-filter:blur(15px); box-shadow:0 14px 35px rgba(3,56,76,.12); }
+.app-header h1 { text-shadow:0 1px 0 rgba(255,255,255,.7); }
+.card,.hero-card,.status-card,.history-item { border:1px solid rgba(255,255,255,.74); background:rgba(255,255,255,.78); backdrop-filter:blur(14px); box-shadow:0 14px 34px rgba(4,60,81,.13); }
+.hero-card { background:linear-gradient(135deg,rgba(255,255,255,.88),rgba(222,250,249,.70)); }
+.search-section,.map-card { border-color:rgba(255,255,255,.75); }
+.search-row input,.autocomplete { background:rgba(255,255,255,.90); backdrop-filter:blur(12px); }
+.category-card { background:rgba(255,255,255,.76); box-shadow:0 8px 20px rgba(4,60,81,.08); }
+.category-card:hover { transform:translateY(-2px); }
+.bottom-nav { border:1px solid rgba(255,255,255,.72); border-bottom:0; border-radius:22px 22px 0 0; background:rgba(255,255,255,.82); box-shadow:0 -8px 26px rgba(4,60,81,.10); }
+body[data-water-place="jangsan-valley"] .hero-card,body[data-water-place="unsusa-valley"] .hero-card,body[data-water-place="daecheon-aegiso"] .hero-card { background:linear-gradient(135deg,rgba(250,255,251,.90),rgba(215,246,229,.72)); }
+body[data-water-place="nakdong-hwamyeong"] .hero-card,body[data-water-place="nakdong-samnak"] .hero-card,body[data-water-place="suyeong-river"] .hero-card,body[data-water-place="oncheoncheon"] .hero-card { background:linear-gradient(135deg,rgba(249,255,255,.90),rgba(214,241,241,.74)); }
+@media (max-width:560px){.app-header{padding:12px;border-radius:18px}.card{padding:16px}.hero-card{padding:18px}.language-button{padding:6px 7px;font-size:10px}}
