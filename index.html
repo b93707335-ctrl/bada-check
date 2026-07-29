@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0077b6" />
   <title>바다체크 | 바다도 체크하고, 안전도 체크!</title>
-  <link rel="stylesheet" href="css/style.css?v=20260729-7" />
+  <link rel="stylesheet" href="css/style.css?v=20260729-8" />
 </head>
 <body>
   <div class="app-shell">
@@ -29,6 +29,17 @@
             <button id="locationBtn" class="secondary-button">내 주변</button>
           </div>
           <div id="autocomplete" class="autocomplete hidden"></div>
+        </section>
+
+        <section class="map-card card" aria-label="선택한 장소의 지도 위치">
+          <div class="section-title-row">
+            <div>
+              <p class="eyebrow">LOCATION MAP</p>
+              <h3 id="mapLocationName">해운대해수욕장 위치</h3>
+            </div>
+            <span class="muted">선택한 장소</span>
+          </div>
+          <iframe id="locationMap" title="선택한 장소 지도" loading="lazy"></iframe>
         </section>
 
         <section class="hero-card">
@@ -78,9 +89,9 @@
     </footer>
   </div>
 
-  <script src="js/data.js?v=20260729-9"></script>
-  <script src="js/scoring.js?v=20260729-9"></script>
-  <script src="js/app.js?v=20260729-9"></script>
+  <script src="js/data.js?v=20260729-11"></script>
+  <script src="js/scoring.js?v=20260729-11"></script>
+  <script src="js/app.js?v=20260729-11"></script>
 </body>
 </html>
 
