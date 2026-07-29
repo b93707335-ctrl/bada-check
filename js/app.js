@@ -11,7 +11,7 @@
   ];
 
   function visibleMetricKeys(category) {
-    return category.metricKeys.filter(key => !(selectedBeach.waterType === 'freshwater' && key === 'salinity'));
+    return category.metricKeys.filter(key => !(selectedBeach.waterType && key === 'salinity'));
   }
 
   function selectBeach(beach) {
@@ -20,6 +20,15 @@
     $('#autocomplete').classList.add('hidden');
     saveHistory(beach);
     renderBeach();
+    renderLocationMap();
+  }
+
+  function renderLocationMap() {
+    const { lat, lng, name } = selectedBeach;
+    const offset = 0.012;
+    const bbox = `${lng - offset},${lat - offset},${lng + offset},${lat + offset}`;
+    $('#mapLocationName').textContent = `${name} 위치`;
+    $('#locationMap').src = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat}%2C${lng}`;
   }
 
   function renderBeach() {
@@ -187,6 +196,6 @@
 
   function distance(lat1, lon1, lat2, lon2) { return Math.hypot(lat1-lat2, lon1-lon2); }
 
-  setupSearch(); setupNavigation(); setupHistory(); setupCategoryCards(); setupTermDefinitions(); saveHistory(selectedBeach); renderBeach();
+  setupSearch(); setupNavigation(); setupHistory(); setupCategoryCards(); setupTermDefinitions(); saveHistory(selectedBeach); renderBeach(); renderLocationMap();
 })();
 
